@@ -1,29 +1,78 @@
 <div class='container'>
-  <div class='row'>
+<div class="row">
     <div class='col-md-3'>
       <h2>User info</h2>
       <%= render 'users/info', user: @book.user %>
       <h2 class="mt-3">New book</h2>
        <%= render 'books/form', book: @book_new %>
     </div>
-    <div class='col-md-8 offset-md-1'>
-  		<h2>Book detail</h2>
-  		<table class='table'>
-  		  <tr>
-  		    <td><%= link_to user_path(@book.user) do %>
-  		      <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg" %><br>
+
+  <div class='col-md-8 offset-md-1'>
+    <h2>Book detail</h2>
+    <table class="table">
+      <tr>
+        <td>
+          <%= link_to user_path(@book.user) do %>
+  		      <%= attachment_image_tag @book.user, :profile_image, :fill, 40, 40, fallback: "no-image-icon.jpg" %><br>
+            <br>
             <%= @book.user.name %>
-            <% end %>
-          </td>
-          <td><%= link_to @book.title,@book %></td>
-          <td><%= @book.body %></td>
-          
-          <% if @book.user == current_user %>
-          <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
-          <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
+          <% end %>
+        </td>
+        <td><%= link_to @book.title, book_path(@book) %></td>
+        <td><%= @book.body %></td>
+        <% if @book.favorited_by?(current_user) %>
+        <td>
+          <%= link_to book_favorites_path(@book), method: :delete do %>
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            <%= @book.favorites.count %>
+          <% end %>
+          <td>コメント数：<%= @book.book_comments.count %></td>
+        </td>
+        <% else %>
+        <td>
+          <%= link_to book_favorites_path(@book), method: :post do %>
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <%= @book.favorites.count %>
+          <% end %>
+        </td>
         <% end %>
-        </tr>
+      </tr>
+    </table>
+    
+    <div>
+    
+    <table class="table">
+      <% @book.book_comments.each do |book_comment| %>
+        <tr>
+          <td>
+            <%= attachment_image_tag book_comment.user, :profile_image, :fill, 40, 40, fallback:'no-image.jpg', size:'40x40' %>
+            <br>
+            <%= book_comment.user.name %>
+          </td>
+          <td><%= book_comment.comment %></td>
+          <% if book_comment.user == current_user %>
+            <td><%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), method: :delete, class:'btn btn-danger btn-xs' %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+        <tr>
+      <% end %>
       </table>
+      
+    <div>
+      <%= form_for [@book, @book_comment] do |f| %>
+        <div class="form-group">
+
+          <%= f.text_area :comment, class:'form-control input-sm' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit:'送信' %>
+        </div>
+      <% end %>
+      
+    </div>
+   
     </div>
   </div>
 </div>
+
