@@ -8,27 +8,27 @@ class SearchController < ApplicationController
     end
     
     private
-    def seach_for(model,content,method)
+    def search_for(model,content,method)
         if model == 'user'
             if method == 'perfect_match'
-                User.where('name Like ?', '%'+content+'%')
+                User.where(name: content)
             elsif method == 'forward_match'
-                User.where('name Like ?','%'+content)
-            elsif method =='backward_mathch'
                 User.where('name Like ?',content+'%')
+            elsif method =='backward_mathch'
+                User.where('name Like ?','%'+content)
             elsif method =='partial'
                 User.where('name Like?', '%'+content+'%')
             end    
         else
-             if method == 'perfect_match'
-                Book.where('title Like ?', '%'+content+'%')
+            if method == 'perfect_match'
+                Book.where(title: content)
             elsif method == 'forward_match'
-                Bookr.where('title Like ?','%'+content)
+                Book.where('title Like ?', content+'%')
             elsif method =='backward_mathch'
-                Book.where('title Like ?',content+'%')
+                Book.where('title Like ?','%'+content)
             elsif method =='partial'
                 Book.where('title Like?', '%'+content+'%')
             end    
-         end           
-     end               
+        end           
+    end               
 end
