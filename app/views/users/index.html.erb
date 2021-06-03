@@ -3,15 +3,20 @@
    <div class="col-md-3">
        
     <h2>User info</h2>
-    <%= render 'info', user: current_user %>
+    <%= render 'users/profile' %>
     <h2>New book</h2>
-    <%= render 'books/form', book: @book %>
+    <%= render 'books/form' %>
     </div>
     
     <div class="col-md-8 offset-md-1">
     <h2>Users</h2>
-    <%= render 'index',users: @users %>
+    <%= render 'users/list',users: @users %>
+    
     </div>
 
    </div>
  </div>
+
+<% if @user.id == current_user.id %>
+	
+<% end %>

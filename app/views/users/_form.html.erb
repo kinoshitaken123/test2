@@ -1,0 +1,36 @@
+<table class='table'>
+  <tr><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %></tr>
+  <tr>
+	  <th>name</th>
+	  <th><%= user.name %></th>
+  </tr>
+  <tr>
+	  <th>introduction</th>
+	  <th><%= user.introduction %></th>
+  </tr>
+  <tr>
+      <th>follows</th>
+      <th><% link_to user.followings.count, following_user_path(@user) %></th>
+  
+  </tr>
+  <tr>
+      <th>followers</th>
+      <th><%= link_to user.followers.count, user_followers_path(user) %></th>
+  </tr>
+  <tr>
+      <th colspan="2">
+          
+      </th>
+  </tr>
+</table>
+
+<div class="row">
+	<%= render 'relationships/follow_button', user: user %>
+</div>
+
+
+ <div class="actions row">
+  <%= f.submit class: "btn btn-primary col-xs-12" %>
+ </div>
+
+</div>
