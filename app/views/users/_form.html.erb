@@ -8,29 +8,10 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
-  <tr>
-      <th>follows</th>
-      <th><% link_to user.followings.count, following_user_path(@user) %></th>
-  
-  </tr>
-  <tr>
-      <th>followers</th>
-      <th><%= link_to user.followers.count, user_followers_path(user) %></th>
-  </tr>
-  <tr>
-      <th colspan="2">
-          
-      </th>
-  </tr>
+ 
 </table>
 
 <div class="row">
 	<%= render 'relationships/follow_button', user: user %>
 </div>
 
-
- <div class="actions row">
-  <%= f.submit class: "btn btn-primary col-xs-12" %>
- </div>
-
-</div>
