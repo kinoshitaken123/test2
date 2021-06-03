@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
 	
-	belongs_to :user, optional: true
+	belongs_to :user, optional: true #Userモデルと1：N
 
 	validates :title, presence: true
 	validates :body, presence: true, length: {maximum: 200}
