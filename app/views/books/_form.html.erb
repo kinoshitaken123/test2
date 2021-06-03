@@ -1,6 +1,6 @@
-<%= render 'books/error', model: @book %>
+<!--%= render 'books/error', model: @book %>-->
 
-<%= form_with model:book,local:true do |f| %>
+<%= form_with model:@book,local:true do |f| %>
 
   <div class="form-group">
     <%= f.label :title %>
