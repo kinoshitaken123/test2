@@ -1,0 +1,20 @@
+<!--いいね機能の部分テンプレート-->
+
+<!--いいねボタンにAjaxの処理を適用させる-->
+
+<!--ユーザーが「いいね」を押しているかどうかを判別するためのメソッド-->
+
+<% if current_user.already_favorite?(book) %>
+  <%= link_to book_favorites_path(book), method: :delete, remote: true do %>
+    <i class="glyphicon glyphicon-heart"></i>
+  <% end %>
+<% else %>
+  <%= link_to book_favorites_path(book), method: :post, remote: true do %>
+    <i class="glyphicon glyphicon-heart-empty"></i>
+  <% end %>
+<% end %>
+<%= book.favorites.count %>
+
+
+<!--JavaScriptリクエストの場合-->
+<!--→データベースにいいねを保存or削除し、JavaScriptを使っていいね部分のみ更新する(ページ読み込みなし)-->

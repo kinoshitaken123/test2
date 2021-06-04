@@ -73,3 +73,5 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'pry-byebug'
 #検索機能使用せずに
 gem 'ransack'
+
+gem 'jquery-rails'
