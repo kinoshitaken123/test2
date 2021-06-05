@@ -13,18 +13,9 @@
       
     <%= render 'layouts/header' %>
         <p id="notice"><%= notice %></p>
-    
-    <div class="row">
-    <div class="col text-center">
-     <% if user_signed_in? %>
-       <%= render 'layouts/search'%>
-      <% end %> 
-    </div>
-    </div>
         
     <%= yield %>
     <%= render 'layouts/footer' %>
-    <div class="search-box">
 
     </div>
   </body>
